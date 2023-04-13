@@ -10,6 +10,7 @@ const initialValues = {
 const onSubmit = (values) => {
   console.log(values);
 };
+
 const validationSchema = yup.object({
   name: yup.string().required("Name is Required"),
   email: yup
@@ -18,6 +19,7 @@ const validationSchema = yup.object({
     .required("Email is Required"),
   password: yup.string().required("Password is Required"),
 });
+
 const SignUpForm = () => {
   const formik = useFormik({
     initialValues,
@@ -30,26 +32,14 @@ const SignUpForm = () => {
       <form onSubmit={formik.handleSubmit}>
         <div className="formControl">
           <label>Name</label>
-          <input
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.name}
-            name="name"
-          />
+          <input type="text" {...formik.getFieldProps("name")} name="name" />
           {formik.errors.name && formik.touched.name && (
             <span className="error">{formik.errors.name}</span>
           )}
         </div>
         <div className="formControl">
           <label>Email</label>
-          <input
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-            name="email"
-          />
+          <input type="text" {...formik.getFieldProps("email")} name="email" />
           {formik.errors.email && formik.touched.email && (
             <span className="error">{formik.errors.email}</span>
           )}
@@ -58,9 +48,7 @@ const SignUpForm = () => {
           <label>Password</label>
           <input
             type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
+            {...formik.getFieldProps("password")}
             name="password"
           />
           {formik.errors.password && formik.touched.password && (
