@@ -1,21 +1,21 @@
 import { useFormik } from "formik";
-
+const initialValues = {
+  name: "",
+  email: "",
+  password: "",
+};
 const SignUpForm = () => {
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      password: "",
-    },
-  });
-
-  const submitHandler = (e) => {
-    e.preventDefualt();
+  const onSubmit = (values) => {
+    console.log(values);
   };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+  });
 
   return (
     <div>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={formik.handleSubmit}>
         <div className="formControl">
           <label>Name</label>
           <input
@@ -43,7 +43,7 @@ const SignUpForm = () => {
             name="password"
           />
         </div>
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
