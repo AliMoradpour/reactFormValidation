@@ -9,7 +9,8 @@
       "passwordConfirm": "Ali!2#4567",
       "gender": "0",
       "nationality": "IR",
-      "intrests": []
+      "intrests": ["React"],
+      "terms": false
     }
   ]
 }

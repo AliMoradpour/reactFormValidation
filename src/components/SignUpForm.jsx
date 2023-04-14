@@ -63,6 +63,9 @@ const validationSchema = Yup.object({
   gender: Yup.string().required("gender is Required"),
   nationality: Yup.string().required("Select Nationality"),
   intrests: Yup.array().min(1).required("at Least Select one expertise"),
+  terms: Yup.boolean()
+    .required("accept the Terms")
+    .oneOf([true], "The Terms and Conditions must be accepted."),
 });
 
 const SignUpForm = () => {
@@ -113,6 +116,19 @@ const SignUpForm = () => {
           checkBoxOptions={checkBoxOptions}
           name="intrests"
         />
+
+        <input
+          type="checkbox"
+          id="terms"
+          name="terms"
+          value={true}
+          onChange={formik.handleChange}
+          checked={formik.values.terms}
+        />
+        <label htmlFor="terms">Terms and Conditions</label>
+        {formik.errors.terms && formik.touched.terms && (
+          <div className="error">{formik.errors.terms}</div>
+        )}
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>
