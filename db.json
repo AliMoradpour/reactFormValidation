@@ -8,7 +8,8 @@
       "password": "Ali!2#4567",
       "passwordConfirm": "Ali!2#4567",
       "gender": "0",
-      "nationality": "IR"
+      "nationality": "IR",
+      "intrests": []
     }
   ]
 }

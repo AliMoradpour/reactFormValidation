@@ -5,7 +5,12 @@ import * as Yup from "yup";
 import Input from "./common/Input";
 import Radio from "./common/Radio";
 import SelectComponent from "./common/SelectComponent";
+import CheckBoxInput from "./common/CheckBoxInput";
 
+const checkBoxOptions = [
+  { label: "React.js", value: "React" },
+  { label: "Vue.js", value: "Vue" },
+];
 const radioOptions = [
   { label: "Male", value: "0" },
   { label: "Female", value: "1" },
@@ -18,15 +23,6 @@ const selectOptions = [
   { label: "USA", value: "US" },
 ];
 
-const savedData = {
-  name: "Ali Moradpour",
-  email: "ali@gmail.com",
-  number: "09393673709",
-  password: "Ali!2#",
-  passwordConfirm: "Ali!2#",
-  gendere: "0",
-};
-
 const initialValues = {
   name: "",
   email: "",
@@ -35,6 +31,8 @@ const initialValues = {
   passwordConfirm: "",
   gender: "",
   nationality: "",
+  intrests: [],
+  terms: false,
 };
 
 const onSubmit = (values) => {
@@ -63,7 +61,8 @@ const validationSchema = Yup.object({
     .required("Password Confirmation is Required")
     .oneOf([Yup.ref("password"), null], "Password must match"),
   gender: Yup.string().required("gender is Required"),
-  nationality: Yup.string().required("Select Nationality")
+  nationality: Yup.string().required("Select Nationality"),
+  intrests: Yup.array().min(1).required("at Least Select one expertise"),
 });
 
 const SignUpForm = () => {
@@ -104,7 +103,16 @@ const SignUpForm = () => {
         />
 
         <Radio formik={formik} radioOptions={radioOptions} name="gender" />
-        <SelectComponent formik={formik} selectOptions={selectOptions} name="nationality" />
+        <SelectComponent
+          formik={formik}
+          selectOptions={selectOptions}
+          name="nationality"
+        />
+        <CheckBoxInput
+          formik={formik}
+          checkBoxOptions={checkBoxOptions}
+          name="intrests"
+        />
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>
