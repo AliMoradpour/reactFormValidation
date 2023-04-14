@@ -1,12 +1,22 @@
 import { useFormik } from "formik";
+import { useState } from "react";
 import * as Yup from "yup";
 
+const savedData = {
+  name: "Ali Moradpour",
+  email: "ali@gmail.com",
+  number: "09393673709",
+  password: "Ali!2#",
+  passwordConfirm: "Ali!2#",
+  gendere: "0",
+};
 const initialValues = {
   name: "",
   email: "",
   number: "",
   password: "",
   passwordConfirm: "",
+  gender: "",
 };
 
 const onSubmit = (values) => {
@@ -28,7 +38,7 @@ const validationSchema = Yup.object({
     .required("Password is Required")
     .min(8, "must be more than 8 char")
     .matches(
-      /^.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?].**$/,
+      /^.*[!@#$%^&*()_+\-={};':"|,.<>?].*$/,
       "Need one special character"
     ),
   passwordConfirm: Yup.string()
@@ -38,11 +48,14 @@ const validationSchema = Yup.object({
 });
 
 const SignUpForm = () => {
+  const [formValues, setFormValues] = useState(null);
+
   const formik = useFormik({
-    initialValues,
+    initialValues: formValues || initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
+    enableReinitialize: true,
   });
 
   return (
@@ -104,7 +117,7 @@ const SignUpForm = () => {
             onChange={formik.handleChange}
             checked={formik.values.gender === "0"}
           />
-          <label htmlFor="0">Female</label>
+          <label htmlFor="0">Male</label>
           <input
             type="radio"
             name="gender"
@@ -113,8 +126,9 @@ const SignUpForm = () => {
             onChange={formik.handleChange}
             checked={formik.values.gender === "1"}
           />
-          <label htmlFor="1">Male</label>
+          <label htmlFor="1">Female</label>
         </div>
+        <button onClick={() => setFormValues(savedData)}>Load Data</button>
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>

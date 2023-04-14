@@ -33,6 +33,6 @@ button {
 }
 .error {
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 400;
   color: red;
 }
