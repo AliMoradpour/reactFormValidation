@@ -36,7 +36,10 @@ const initialValues = {
 };
 
 const onSubmit = (values) => {
-  console.log(values);
+  axios
+    .post("http://localhost:3001/users", values)
+    .then((res) => console.log(res.data))
+    .catch((err) => console.log(err.message));
 };
 
 const validationSchema = Yup.object({
