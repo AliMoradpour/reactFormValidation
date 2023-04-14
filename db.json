@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Ali Moradpour",
+      "email": "ali@gmail.com",
+      "number": "09393673709",
+      "password": "Ali!2#",
+      "passwordConfirm": "Ali!2#",
+      "gendere": "0"
+    }
+  ]
+}
