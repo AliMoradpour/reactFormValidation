@@ -4,11 +4,19 @@ import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Input from "./common/Input";
 import Radio from "./common/Radio";
+import SelectComponent from "./common/SelectComponent";
 
 const radioOptions = [
-  {label : "Male" , value : "0"},
-  {label : "Female" , value : "1"},
-]
+  { label: "Male", value: "0" },
+  { label: "Female", value: "1" },
+];
+
+const selectOptions = [
+  { label: "select Nationality ...", value: "" },
+  { label: "Iran", value: "IR" },
+  { label: "Germany", value: "GER" },
+  { label: "USA", value: "US" },
+];
 
 const savedData = {
   name: "Ali Moradpour",
@@ -26,6 +34,7 @@ const initialValues = {
   password: "",
   passwordConfirm: "",
   gender: "",
+  nationality: "",
 };
 
 const onSubmit = (values) => {
@@ -54,6 +63,7 @@ const validationSchema = Yup.object({
     .required("Password Confirmation is Required")
     .oneOf([Yup.ref("password"), null], "Password must match"),
   gender: Yup.string().required("gender is Required"),
+  nationality: Yup.string().required("Select Nationality")
 });
 
 const SignUpForm = () => {
@@ -77,13 +87,24 @@ const SignUpForm = () => {
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <Input label="Name" name="name" formik={formik}/>
-        <Input label="Email" name="email" formik={formik}/>
-        <Input label="Phone Number" name="number" formik={formik}/>
-        <Input label="Password" name="password" type="password" formik={formik}/>
-        <Input label="Password Confirmation" name="passwordConfirm" type="password" formik={formik}/>
+        <Input label="Name" name="name" formik={formik} />
+        <Input label="Email" name="email" formik={formik} />
+        <Input label="Phone Number" name="number" formik={formik} />
+        <Input
+          label="Password"
+          name="password"
+          type="password"
+          formik={formik}
+        />
+        <Input
+          label="Password Confirmation"
+          name="passwordConfirm"
+          type="password"
+          formik={formik}
+        />
 
-        <Radio formik={formik} radioOptions={radioOptions} name="gender"/>
+        <Radio formik={formik} radioOptions={radioOptions} name="gender" />
+        <SelectComponent formik={formik} selectOptions={selectOptions} name="nationality" />
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>
