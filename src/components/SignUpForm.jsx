@@ -3,6 +3,12 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Input from "./common/Input";
+import Radio from "./common/Radio";
+
+const radioOptions = [
+  {label : "Male" , value : "0"},
+  {label : "Female" , value : "1"},
+]
 
 const savedData = {
   name: "Ali Moradpour",
@@ -77,26 +83,7 @@ const SignUpForm = () => {
         <Input label="Password" name="password" type="password" formik={formik}/>
         <Input label="Password Confirmation" name="passwordConfirm" type="password" formik={formik}/>
 
-        <div className="formControl">
-          <input
-            type="radio"
-            name="gender"
-            id="0"
-            value="0"
-            onChange={formik.handleChange}
-            checked={formik.values.gender === "0"}
-          />
-          <label htmlFor="0">Male</label>
-          <input
-            type="radio"
-            name="gender"
-            id="1"
-            value="1"
-            onChange={formik.handleChange}
-            checked={formik.values.gender === "1"}
-          />
-          <label htmlFor="1">Female</label>
-        </div>
+        <Radio formik={formik} radioOptions={radioOptions} name="gender"/>
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>
